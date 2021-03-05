@@ -1,6 +1,6 @@
 To produce data to Kafka run the Python code below
 Pre-requisites: 
-1) MAADS-VIPER Should be Listening on IP: http://127.0.0.1, and Port: 8000, HPDE Should be Listening On Port: 8001
+1) MAADS-VIPER Should be Listening on IP: http://127.0.0.1, and Port: 9000
 2) Install in folder /viperdemo
 3) Python 3.5+
 4) MAADSTML python library and others are installed
@@ -42,7 +42,7 @@ VIPERPORT=9000
 # to your location of admin.tok
 def getparams():
         
-     with open("C:/MAADS/Golang/go/bin/admin.tok", "r") as f:
+     with open("C:/viperdemo/admin.tok", "r") as f:
         VIPERTOKEN=f.read()
   
      return VIPERTOKEN
