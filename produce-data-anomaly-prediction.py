@@ -3,6 +3,32 @@
 # Toronto, Ontario Canada
 # For help email: support@otics.ca 
 
+#######################################################################################################################################
+
+# This file will produce data to a Kafka cluster for Bank Fraud Detection.  Before using this
+# code you MUST have:
+# 1) Downloaded and installed MAADS-VIPER from: https://github.com/smaurice101/transactionalmachinelearning
+
+# 2) You have VIPER listening for a connection on port IP: http://127.0.01 and PORT: 9000 (you can specify different IP and PORT
+#    just change the  VIPERHOST="http://127.0.0.1" and VIPERPORT=9000)
+
+# 3) You have created a KAfka cluster in Confluent Cloud (https://confluent.cloud/)
+
+# 4) You have updated the VIPER.ENV file in the following fields:
+# a) KAFKA_CONNECT_BOOTSTRAP_SERVERS=[Enter the bootstrap server - this is the Kafka broker(s) - separate multiple brokers by a comma]
+# b) KAFKA_ROOT=kafka
+# c) SSL_CLIENT_CERT_FILE=[Enter the full path to client.cer.pem]
+# d) SSL_CLIENT_KEY_FILE=[Enter the full path to client.key.pem]
+# e) SSL_SERVER_CERT_FILE=[Enter the full path to server.cer.pem]
+
+# f) CLOUD_USERNAME=[Enter the Cloud Username- this is the KEY]
+# g) CLOUD_PASSWORD=[Enter the Cloud Password - this is the secret]
+
+# NOTE: IF YOU GET STUCK WATCH THE YOUTUBE VIDEO: https://www.youtube.com/watch?v=b1fuIeC7d-8
+# Or email support@otics.ca
+#########################################################################################################################################
+
+
 # Produce Data to Kafka Cloud
 import maadstml
 
@@ -32,7 +58,7 @@ VIPERPORT=9000
 # to your location of admin.tok
 def getparams():
         
-     with open("C:/MAADS/Golang/go/bin/admin.tok", "r") as f:
+     with open("C:/viperdemo/admin.tok", "r") as f:
         VIPERTOKEN=f.read()
   
      return VIPERTOKEN
@@ -44,6 +70,7 @@ def random_with_N_digits(n):
     range_end = (10**n)-1
     return randint(range_start, range_end)
 
+# Simulate product prices
 def getproductprice(product):
    ru=1.0
    print(product)
@@ -226,11 +253,15 @@ def sendtransactiondata(topiclist,producerids,bankaccounts,transactions,j):
                   print(e)
              
 
-      
+# Change the number of numberofbankaccounts or transactions       
 numberofbankaccounts=50
 transactions=1000000
 
+#setup the data
 topics,producerids=datasetup(numberofbankaccounts,transactions)
+
+# Start producing the data
 element_run = Parallel(n_jobs=-1)(delayed(sendtransactiondata)(topics,producerids,numberofbankaccounts,transactions,k) for k in range(transactions))
   
+
 
