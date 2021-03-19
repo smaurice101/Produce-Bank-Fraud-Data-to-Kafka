@@ -190,7 +190,9 @@ def sendtransactiondata(topiclist,producerids,bankaccounts,transactions,j):
                        "Rent","MortgagePayment","Fruits", "Vegetables","Meat","Luxury","Dress","Suit"]
 
        fields=["transactiondatetime","currency","productpurchased","amountpaid","location","transactionid","counterparty"]
-#       for j in range(transactions):
+       ap=500
+       idx=0
+
        for b in range(bankaccounts):  # get the bank account
              inputbuf=""
              toplist=[]
