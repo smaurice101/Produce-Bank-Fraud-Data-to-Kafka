@@ -15,8 +15,7 @@ Pre-requisites:
 
 #######################################################################################################################################
 
-# This file will produce data to a Kafka cluster for Bank Fraud Detection.  Before using this
-# code you MUST have:
+# This file will produce data to a Kafka cluster for Bank Fraud Detection.  Before using this code you MUST have:
 # 1) Downloaded and installed MAADS-VIPER from: https://github.com/smaurice101/transactionalmachinelearning
 
 # 2) You have VIPER listening for a connection on port IP: http://127.0.01 and PORT: 9000 (you can specify different IP and PORT
@@ -266,7 +265,7 @@ def sendtransactiondata(topiclist,producerids,bankaccounts,transactions,j):
              
 
 # Change the number of numberofbankaccounts or transactions       
-numberofbankaccounts=50
+numberofbankaccounts=5
 transactions=1000000
 
 #setup the data
@@ -275,5 +274,7 @@ topics,producerids=datasetup(numberofbankaccounts,transactions)
 # Start producing the data
 element_run = Parallel(n_jobs=-1)(delayed(sendtransactiondata)(topics,producerids,numberofbankaccounts,transactions,k) for k in range(transactions))
   
+
+
 
 ```
