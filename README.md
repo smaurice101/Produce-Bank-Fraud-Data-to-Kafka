@@ -201,6 +201,7 @@ def sendtransactiondata(topiclist,producerids,bankaccounts,transactions,j):
        fields=["transactiondatetime","currency","productpurchased","amountpaid","location","transactionid","counterparty"]
        ap=500
        idx=0
+       enabletls=1
 
        for b in range(bankaccounts):  # get the bank account
              inputbuf=""
@@ -259,7 +260,7 @@ def sendtransactiondata(topiclist,producerids,bankaccounts,transactions,j):
              print("Sending Data to " + str(len(toplist)) + " data streams (topics)- Bank Account=" + str(b) + " Iteration=" +str(j))
              delay=7000
              try:
-               result=maadstml.viperproducetotopic(VIPERTOKEN,VIPERHOST,VIPERPORT,topicbuf,produceridbuf,1,delay,'','', '',0,inputbuf)
+               result=maadstml.viperproducetotopic(VIPERTOKEN,VIPERHOST,VIPERPORT,topicbuf,produceridbuf,enabletls,delay,'','', '',0,inputbuf)
              except Exception as e:
                   print(e)
              
